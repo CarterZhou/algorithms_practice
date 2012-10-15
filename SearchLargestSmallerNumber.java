@@ -11,14 +11,14 @@ public class SearchLargestSmallerNumber {
 		while(low<=high){
 			mid = (low+high)/2;
 			// When low = high,
-			// an exact finish time may or may not be found.
+			// an exact number may or may not be found.
 			// Assign value to highestCompatible accordingly.
 			if(low==high){
-				// e.g. find 15 between 14,16 and finish[mid] = 16.
+				// e.g. find 15 between 14,16 and array[mid] = 16.
 				// In this case return index of 14
 				if(x<array[mid]){
 					nearest = mid-1;
-				// e.g. find 15 between 14,16 and finish[mid] = 14.
+				// e.g. find 15 between 14,16 and array[mid] = 14.
 				// In this case return index of 14
 			    }else if(x>array[mid]){
 			    	nearest = mid;
