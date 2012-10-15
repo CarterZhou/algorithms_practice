@@ -12,7 +12,7 @@ public class SearchLargestSmallerNumber {
 			mid = (low+high)/2;
 			// When low = high,
 			// an exact number may or may not be found.
-			// Assign value to highestCompatible accordingly.
+			// Assign value to nearest accordingly.
 			if(low==high){
 				// e.g. find 15 between 14,16 and array[mid] = 16.
 				// In this case return index of 14
