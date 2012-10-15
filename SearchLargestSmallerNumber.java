@@ -31,7 +31,7 @@ public class SearchLargestSmallerNumber {
 			}else{
 				// If array[mid] = x iterate backwards until the largest number < x is found.
 				mid = mid -1;
-				while(array[mid] == x && mid >=0){
+				while( mid >=0 && array[mid] == x ){
 					mid = mid-1;
 				}
 				// If no such value is found, return the first number of array
