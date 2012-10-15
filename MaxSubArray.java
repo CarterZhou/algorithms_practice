@@ -1,6 +1,6 @@
 package com.cupid.algorithm;
 
-public class MaxSubArrayTest {
+public class MaxSubArray {
 
 	public static int maxSub(int a[],Result r){
 		int sum = 0;

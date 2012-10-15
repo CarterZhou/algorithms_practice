@@ -1,6 +1,6 @@
 package com.cupid.algorithm.sort;
 
-public class QuickSortTest {
+public class QuickSort {
 
 	
 	public static void quickSort(int[] a,int begin,int end){

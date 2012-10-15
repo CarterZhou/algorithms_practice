@@ -2,7 +2,7 @@ package com.cupid.algorithm.sort;
 
 import java.util.Random;
 
-public class SelectionSortTest {
+public class SelectionSort {
 
 	
 	public static void insertionSort(int[] a){

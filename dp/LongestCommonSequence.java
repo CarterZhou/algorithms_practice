@@ -1,9 +1,8 @@
 package com.cupid.algorithm.dp;
 
 import java.util.Arrays;
-import java.util.Stack;
 
-public class LongestCommonSequenceTest {
+public class LongestCommonSequence {
 	
 	// Reset the standard output to a file.
 	/*static{
@@ -78,7 +77,7 @@ public class LongestCommonSequenceTest {
 	}
 	
 	// Use dynamic programming to calculate LCS length of two strings , with a min(m,n)+1 size array 
-	public static <T> int findLCSLengthBy1Array(T[] longArray,T[] shortArray){
+	public static int findLCSLengthBy1Array(char[] longArray,char[] shortArray){
 		int size = Math.min(longArray.length, shortArray.length)-1;
 		int length = 0;
 		if(size>0){
@@ -86,12 +85,10 @@ public class LongestCommonSequenceTest {
 			for(int i=1;i<longArray.length;i++){
 				int lcs0 = lcs[0];
 				for(int j=1;j<shortArray.length;j++){
-					// Save lcs[j] acting as C[i-1,j-1] first
-					// for the next calculation.
+					// Save lcs[j] acting as C[i-1,j-1] first for the next calculation.
 					int swap = lcs[j];
 					if(longArray[i]==shortArray[j]){
-						// If two chars match,
-						// use the current C[i-1,j-1]
+						// If two chars match, calculate lcs[j] =  current C[i-1,j-1] + 1
 						lcs[j] = lcs[0]+1;
 					}else if(lcs[j] >=lcs[j-1]){
 						lcs[j] = lcs[j];
@@ -109,7 +106,7 @@ public class LongestCommonSequenceTest {
 	}
 	
 	// Use dynamic programming to calculate LCS length of two strings with a 2*min(m,n) size table 
-	public static <T> int findLCSLengthBy2Array(T[] longString,T[] shortString){
+	public static int findLCSLengthBy2Array(char[] longString,char[] shortString){
 		int size = Math.min(longString.length, shortString.length)-1;
 		int length = 0;
 		if(size>0){
@@ -138,7 +135,7 @@ public class LongestCommonSequenceTest {
 		return length ;
 	}
 	
-	public static <T> void dp_bottomUp_findLCSLength(T[] x,T[] y,int[][] lcsLength){
+	public static void dp_bottomUp_findLCSLength(char[] x,char[] y,int[][] lcsLength){
 		for(int i=0;i<y.length;i++){
 			lcsLength[0][i] =0;
 		}
@@ -158,7 +155,7 @@ public class LongestCommonSequenceTest {
 		}
 	}
 	
-	public static <T> void dp_topDown_findLCSLength(T[] x,T[] y,int[][] lcsLength){
+	public static void dp_topDown_findLCSLength(char[] x,char[] y,int[][] lcsLength){
 		for(int i=0;i<y.length;i++){
 			lcsLength[0][i] =0;
 		}
@@ -175,7 +172,7 @@ public class LongestCommonSequenceTest {
 		memoized_findLCSLength(x, y, lcsLength, x.length-1, y.length-1);
 	}
 	
-	private static <T> int memoized_findLCSLength(T[] x,T[] y,int[][] lcsLength,int i,int j){
+	private static int memoized_findLCSLength(char[] x,char[] y,int[][] lcsLength,int i,int j){
 		if(lcsLength[i][j]>=0){
 			// Keep track of how many recursion calls are saved.
 			savedRecursions++;
@@ -194,13 +191,14 @@ public class LongestCommonSequenceTest {
 		}
 	}
 	// Get a concrete optimal solution.
-	public static <T> String findLCS(int[][] lcsLength,T[] x,T[] y){
-		StringBuilder sb = new StringBuilder();
+	public static String findLCS(int[][] lcsLength,char[] x,char[] y){
 		int i=x.length-1;
 		int j=y.length-1;
+		char[] result = new char[lcsLength[i][j]];
+		int resultLastIndex = result.length-1;
 		while(i>0 && j>0){
 			if(x[i] == y[j]){
-				sb.insert(0, x[i]);
+				result[resultLastIndex--] = x[i];
 				i = i-1;
 				j = j-1;
 			}else if(lcsLength[i-1][j] >= lcsLength[i][j-1]){
@@ -209,13 +207,13 @@ public class LongestCommonSequenceTest {
 				j = j-1;
 			}
 		}
-		return sb.toString();
+		return new String(result);
 	}
 	
 	public static void main(String[] args) {
 		
-		Character[] x1 = new Character[201];
-		Character[] y1 = new Character[101];
+		char[] x1 = new char[201];
+		char[] y1 = new char[101];
 		x1[0] = '?';
 		y1[0] = '?';
 		
@@ -253,21 +251,16 @@ public class LongestCommonSequenceTest {
 		// Print out how many duplicate recursion calls for solving overlapping sub-problems were saved.
 		System.out.println("Recursion calls saved by memoized top-down manner: " + savedRecursions + " times...");
 		
-		int[] numberSequence = new int[]{Integer.MIN_VALUE,2,3,6,1,4};
-	//	int[] numberSequence = new int[]{Integer.MIN_VALUE,19,4,6,1,7,21,12,8,3,3,5,10,9,4};
+//		int[] numberSequence = new int[]{Integer.MIN_VALUE,2,3,6,1,4};
+		int[] numberSequence = new int[]{Integer.MIN_VALUE,19,4,6,1,7,21,12,8,3,3,5,10,9,4};
 		int size = numberSequence.length;
 		int[][] maxLength = new int[size][size];
 		
 		int[] result = findMonoIncreasingNumberSequence(numberSequence,maxLength);
-		for(int i=0;i<maxLength.length;i++){
-			for(int j=0;j<maxLength.length;j++){
-				System.out.format("%3s", maxLength[i][j]);
-			}
-			System.out.println();
-		}
+		
 		for (int i : result) {
 			System.out.print(i);
 		}
-	}
+	    }
 
 }

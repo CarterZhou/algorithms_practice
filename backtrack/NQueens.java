@@ -1,6 +1,6 @@
 package com.cupid.algorithm.backtrack;
 
-public class NQueenTest {
+public class NQueens {
 
 	private static char[][] chessBoard = null;
 	

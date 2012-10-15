@@ -1,6 +1,6 @@
 package com.cupid.algorithm.dp;
 
-public class RodCuttingTest {
+public class RodCutting {
 
 	public static int dp_topDown_rodCutting(int[] payoffs,int[] solutions,int length,int cost){
 		int[] results = new int[length+1];

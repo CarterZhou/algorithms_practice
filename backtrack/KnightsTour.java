@@ -5,9 +5,9 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-public class KnightsTourTest {
+public class KnightsTour {
 	
-	public KnightsTourTest(){
+	public KnightsTour(){
 	/*	try {
 			OutputStream fos = new FileOutputStream("d:\\knightstour_6.txt");
 			PrintStream out = new PrintStream(fos);
@@ -87,7 +87,7 @@ public class KnightsTourTest {
 	}
 
 	public static void main(String[] args) {
-		KnightsTourTest kt = new KnightsTourTest();
+		KnightsTour kt = new KnightsTour();
 		kt.initChessBoard();
 		long begin = System.currentTimeMillis();
 	//	for(int i=0;i<kt.rowsAndCols;i++){

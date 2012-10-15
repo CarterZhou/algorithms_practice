@@ -1,6 +1,6 @@
 package com.cupid.algorithm.dp;
 
-public class FibonacciTest {
+public class Fibonacci {
 	
 	
 	public static long recursiveFibonacci(int n){
