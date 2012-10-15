@@ -34,7 +34,7 @@ public class SearchLargestSmallerNumber {
 				while( mid >=0 && array[mid] == x ){
 					mid = mid-1;
 				}
-				// If no such value is found, return the first number of array
+				// If no such value is found, return the first index of array
 				if(mid <0){
 					mid = 0;
 				}
