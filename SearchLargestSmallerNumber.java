@@ -13,18 +13,18 @@ public class SearchLargestSmallerNumber {
 			// When low = high,
 			// an exact number may or may not be found.
 			// Assign value to nearest accordingly.
-			if (low == high) {
+			if(low==high){
 				// e.g. find 15 between 14,16 and array[mid] = 16.
 				// In this case return index of 14
-				if (x < array[mid]) {
-					nearest = mid - 1;
-					// e.g. find 15 between 14,16 and array[mid] = 14.
-					// In this case return index of 14
-				} else if (x > array[mid]) {
-					nearest = mid;
+				if(x<array[mid]){
+					nearest = mid-1;
+				// e.g. find 15 between 14,16 and array[mid] = 14.
+				// In this case return index of 14
+			    }else if(x>array[mid]){
+			    	nearest = mid;
 				}
 			}
-			if (x < array[mid]) {
+			if( x < array[mid]){
 				if(mid == 0){
 					nearest = -1;
 				}
@@ -47,15 +47,14 @@ public class SearchLargestSmallerNumber {
 		}
 		return nearest;
 	}
-
 	public static void main(String[] args) {
-		int[] a = new int[] { 3, 4, 5, 6, 7, 9, 9, 9, 9, 10, 11, 12, 14, 16 };
-		int x = 9;
+		int[] a = new int[] { 1, 3, 4, 5, 6, 7, 9, 9, 9, 9, 10, 11, 12, 14, 16 };
+		int x = 0;
 		int index = binarySearchNearest(a, x);
-		if(index==-1){
-			System.out.println("No value is less than " + x + " is found");
-		}else{
-			System.out.println("Index is " + index + " and value is " + a[index]);
+		if (index == -1) {
+			System.out.println("No number less than " + x + " is found");
+		} else {
+			System.out.println("Index is " + index + " and number is " + a[index]);
 		}
 	}
 
