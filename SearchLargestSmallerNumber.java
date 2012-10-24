@@ -45,8 +45,8 @@ public class SearchLargestSmallerNumber {
 		return nearest;
 	}
 	public static void main(String[] args) {
-		int[] a = new int[] { 1, 3, 4, 5, 6, 7, 9, 9, 9, 9, 10, 11, 12, 14, 16 };
-		int x = 1;
+		int[] a = new int[] { 1, 3, 3, 5, 6, 7, 9, 9, 9, 9, 10, 11, 12, 14, 16 };
+		int x = 4;
 		int index = binarySearchNearest(a, x);
 		if (index == -1) {
 			System.out.println("No number less than " + x + " is found");
