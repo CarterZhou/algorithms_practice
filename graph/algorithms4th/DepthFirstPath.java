@@ -9,17 +9,17 @@ public class DepthFirstPath {
 	private boolean[] marked;
 	private int[] edgeTo;
 	private final int source;
-	private Graph G;
+	private Graph myGraph;
 	
 	public DepthFirstPath(int source,Graph G){
 		this.source = source;
-		this.G = G;
+		this.myGraph = G;
 	}
 	
-	public void dfsFormSource(){
-		marked = new boolean[G.V()];
-		edgeTo = new int[G.V()];
-		dfs(G,source);
+	public void dfsFromSource(){
+		marked = new boolean[myGraph.V()];
+		edgeTo = new int[myGraph.V()];
+		dfs(myGraph,source);
 	}
 
 	private void dfs(Graph G, int source) {
@@ -37,13 +37,11 @@ public class DepthFirstPath {
 	}
 	
 	public Iterable<Integer> findPath(int destination){
-		Stack<Integer> s = null;
+		Stack<Integer> s = new Stack<Integer>();
 		if(hasPathTo(destination)){
-			s = new Stack<Integer>();
-			int src = edgeTo[destination]; 
-			while(src!=source){
-				s.push(src);
-				src = edgeTo[src];
+			while(destination!=source){
+				s.push(destination);
+				destination = edgeTo[destination];
 			}
 			s.push(source);
 		}
@@ -60,11 +58,11 @@ public class DepthFirstPath {
 			Scanner in = new Scanner(file);
 			Graph G = new Graph(in);
 			System.out.println(G);
-			DepthFirstPath dfsp = new DepthFirstPath(2, G);
-			dfsp.dfsFormSource();
-			int des = 6;
+			DepthFirstPath dfsp = new DepthFirstPath(0, G);
+			dfsp.dfsFromSource();
+			int des = 5;
 			Stack<Integer> path = (Stack<Integer>) dfsp.findPath(des);
-			if(path!=null){
+			if(path.size()>0){
 				System.out.println("Path from " + dfsp.getSource() + " to " + des + " is:" );
 				while(!path.empty()){
 					int v = path.pop();
@@ -74,7 +72,6 @@ public class DepthFirstPath {
 						System.out.print("-" + v);
 					}
 				}
-				System.out.println("-" + des);
 			}else{
 				System.out.println("No Path from " + dfsp.getSource() + " to " + des );
 			}

@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class TwoColorability {
 	
 	private boolean[] marked;
-	// 1 and 0 are used, representing for two colors
-	private int[] color;
+	// For each element in this boolean array, true and false represent for two colors.
+	private boolean[] color;
 	private boolean twoColorable = true;
 
 	public TwoColorability(Graph G){
@@ -21,10 +21,10 @@ public class TwoColorability {
 	
 	public void dfsGraph_Recursion(Graph G){
 		marked = new boolean[G.V()];
-		color = new int[G.V()];
+		color = new boolean[G.V()];
 		for (int v=0;v<G.V();v++) {
 			if(!marked[v]){
-				color[v] = 1;
+				color[v] = true;
 				dfs(G,v);
 			}
 		}
@@ -35,7 +35,7 @@ public class TwoColorability {
 		for (Integer v : G.adj(u)) {
 			if(!marked[v]){
 				// Assign the other color before searching. 
-				color[v] = color[u] ^ 1;
+				color[v] = !color[u];
 				dfs(G,v);
 			}else{
 				// If an adjacent vertex is marked,

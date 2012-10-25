@@ -1,7 +1,11 @@
 package com.cupid.algorithm.graph.algorithms4th;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class CycleDectection {
@@ -28,12 +32,9 @@ public class CycleDectection {
 	
 	private void dfs(Graph G, int u,int predecessor) {
 		marked[u] = true;
-		int u_predecessor = predecessor;
 		for (Integer v : G.adj(u)) {
 			if(!marked[v]){
-				predecessor = u;
-				dfs(G,v,predecessor);
-				predecessor = u_predecessor;
+				dfs(G,v,u);
 			}else{
 				if( v!=predecessor){
 					cyclic = true;
