@@ -1,18 +1,18 @@
-package com.cupid.algorithm.graph.algorithms4th;
+package com.cupid.algorithm.algorithms4th.graph.undirected;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- *  The <tt>Bag</tt> class represents a bag (or multiset) of 
+ *  The Bag class represents a bag (or multiset) of 
  *  generic items. It supports insertion and iterating over the 
  *  items in arbitrary order.
- *  <p>
- *  The <em>add</em>, <em>isEmpty</em>, and <em>size</em>  operation 
+ *  
+ *  The add, isEmpty, and size  operation 
  *  take constant time. Iteration takes time proportional to the number of items.
- *  <p>
- *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/13stacks">Section 1.3</a> of
- *  <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
+ * 
+ *  For additional documentation, see http://algs4.cs.princeton.edu/13stacks of
+ *  Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne.
  */
 public class Bag<Item> implements Iterable<Item> {
     private int N;         // number of elements in bag

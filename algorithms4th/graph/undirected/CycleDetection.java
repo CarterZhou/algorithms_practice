@@ -1,4 +1,4 @@
-package com.cupid.algorithm.graph.algorithms4th;
+package com.cupid.algorithm.algorithms4th.graph.undirected;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -8,12 +8,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class CycleDectection {
+public class CycleDetection {
 	
 	private boolean[] marked;
 	private boolean cyclic = false;
 
-	public CycleDectection(Graph G){
+	public CycleDetection(Graph G){
 		dfsGraph_Recursion(G);
 	}
 	
@@ -44,12 +44,12 @@ public class CycleDectection {
 	}
 	
 	public static void main(String[] args) {
-		File file = new File("d:\\tinyG3.txt");
+		File file = new File("d:\\tinyG2.txt");
 		try {
 			Scanner in = new Scanner(file);
 			Graph G = new Graph(in);
 			System.out.println(G);
-			CycleDectection cd = new CycleDectection(G);
+			CycleDetection cd = new CycleDetection(G);
 			System.out.println("Cycle in the graph ? " + cd.isCyclic());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

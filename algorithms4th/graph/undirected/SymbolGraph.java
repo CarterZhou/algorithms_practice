@@ -1,4 +1,4 @@
-package com.cupid.algorithm.graph.algorithms4th;
+package com.cupid.algorithm.algorithms4th.graph.undirected;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
