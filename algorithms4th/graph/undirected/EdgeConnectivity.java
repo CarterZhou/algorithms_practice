@@ -14,9 +14,10 @@ import java.util.Scanner;
 public class EdgeConnectivity {
 	// The number of visit to each vertex during DFS.
 	private int[] dfsOrder;
-	// For any Vertex v, whichAncestor[v] tells that the farthest ancestor.
-	// It can reach via its own or its children's back edges.
+	// For any Vertex v, whichAncestor[v] tells that the farthest ancestor
+	// it can reach via its own or its children's back edges.
 	// If no back edge, it means it can only connect to parent through a DFS Tree edge.
+	// That tree edge is a bridge.
 	private int[] whichAncestor;
 			
 	private int count;
