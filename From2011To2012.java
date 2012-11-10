@@ -85,7 +85,7 @@ public class From2011To2012 {
 	}
 	
 	// A simple solution is as follows:
-	// Generate numbers on each level, and use BFS to test whether a number is 2012,
+	// Use BFS to generate numbers on each level, and  test whether a number is 2012,
 	// and the number is either calculated by either *3 or -5.
 	// In this case, because 2012 cannot be divided by 3,
 	// thus only subtracting 5 is a valid operation. That is, the final calculation should be 2017 - 5 = 2012
