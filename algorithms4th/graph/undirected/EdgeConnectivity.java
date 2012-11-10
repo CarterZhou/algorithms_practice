@@ -20,14 +20,13 @@ public class EdgeConnectivity {
 	// That tree edge is a bridge.
 	private int[] whichAncestor;
 			
-	private int count;
+	private int count = 0;
 	private Graph myGraph;
 	
 	private boolean noBridges = true;
 	
 	public EdgeConnectivity(Graph G){
 		this.myGraph = G;
-		count = 0;
 		
 		dfsOrder = new int[G.V()];
 		whichAncestor = new int[G.V()];
@@ -88,7 +87,6 @@ public class EdgeConnectivity {
 			System.out.println(G);
 			EdgeConnectivity ec = new EdgeConnectivity(G);
 			System.out.println("\nIs the graph edge connected ? " + ec.isEdgeConnected());
-			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
