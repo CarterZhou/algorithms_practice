@@ -2,6 +2,27 @@ package com.cupid.algorithm;
 
 public class MaxSubArray {
 
+	
+	private class Result {
+		private int begin = -1;
+		private int end = -1;
+		public int getBegin() {
+			return begin;
+		}
+		public void setBegin(int begin) {
+			this.begin = begin;
+		}
+		public int getEnd() {
+			return end;
+		}
+		public void setEnd(int end) {
+			this.end = end;
+		}
+		
+		
+	}
+	
+	
 	public static int maxSub(int a[],Result r){
 		int sum = 0;
 		int tmp_sum = 0;
@@ -22,7 +43,7 @@ public class MaxSubArray {
 	}
 	
 	public static void main(String[] args) {
-		Result r = new Result();
+		Result r = new MaxSubArray().new Result();
 		int[] a = new int[]{13,-3,-25,20,-3,-16,-23,18,20,-7,12,-5,-2,15,-7,8};
 		int result = maxSub(a,r);
 		System.out.println("Maximum sub-array: "+result);

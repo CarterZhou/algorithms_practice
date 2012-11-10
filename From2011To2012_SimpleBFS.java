@@ -29,7 +29,7 @@ import java.util.Stack;
  * 
  */
 
-public class From2011To2012 {
+public class From2011To2012_SimpleBFS {
 	
 	Queue<Node> q = new LinkedList<Node>();
 	Set<Integer> values = new HashSet<Integer>();
@@ -167,11 +167,11 @@ public class From2011To2012 {
 	}
 
 	public static void main(String[] args) {
-		From2011To2012 result =  new From2011To2012();
+		From2011To2012_SimpleBFS problem =  new From2011To2012_SimpleBFS();
 		int entrance = 2011;
 		int exit = 2012;
 		long begin = System.currentTimeMillis();
-		result.compute(entrance,exit);
+		problem.compute(entrance,exit);
 		long end = System.currentTimeMillis();
 		System.out.println("Time elapsed : " + (end - begin) + " ms");
 	}
