@@ -31,15 +31,18 @@ import java.util.Stack;
 
 public class From2011To2012_SimpleBFS {
 	
-	Queue<Node> q = new LinkedList<Node>();
-	Set<Integer> values = new HashSet<Integer>();
+	private Queue<Node> src = new LinkedList<Node>();
+	private Queue<Node> des = new LinkedList<Node>();
+	private Set<Integer> values = new HashSet<Integer>();
+	// Keep track of the number of visited nodes.
+	private int visitedNodes = 0;
 	
 	private  enum OperationAndDirection {
 		 START(0),
-		 LEFT_7(1),RIGHT_7(2),
-		 LEFT_5(3),RIGHT_5(4),
-		 LEFT_3(5),RIGHT_3(6),
-		 LEFT_2(7),RIGHT_2(8);
+		 ADD7_LEFT(1),ADD7_RIGHT(2),
+		 SUB5_LEFT(3),SUB5_RIGHT(4), // SUB5_RIGHT is the ONLY OandD that leads to the exit 2012.
+		 MUL3_LEFT(5),MUL3_RIGHT(6),
+		 DIV2_LEFT(7),DIV2_RIGHT(8);
 		 
 		public final int value;
 
@@ -52,18 +55,16 @@ public class From2011To2012_SimpleBFS {
 		public int value;
 		public OperationAndDirection od;
 		public Node parent;
-		public int level;
-		public Node(int v,OperationAndDirection od,Node p,int l){
+		public Node(int v,OperationAndDirection od,Node p){
 			this.value = v;
 			this.parent = p;
 			this.od = od;
-			this.level = l;
 		}
 
 
 		@Override
 		public String toString() {
-			return value+":"+level+":"+od;
+			return value+":"+od;
 		}
 
 		@Override
@@ -77,10 +78,11 @@ public class From2011To2012_SimpleBFS {
 		}
 	}
 	
-	public void addOrNot(Node n){
+	private void addOrNot(Node n){
 		if(!values.contains(n.hashCode())){
 			values.add(n.hashCode());
-			q.add(n);
+			src.add(n);
+			visitedNodes++;
 		}
 	}
 	
@@ -92,19 +94,18 @@ public class From2011To2012_SimpleBFS {
 	// Also notice that -5 should be a from-left-to-right operation.
 	// That is, after -5, the direction is going to the exit, not going back to the entrance.
 	public void compute(int entrance,int exit){
-		Node start = new Node(entrance,OperationAndDirection.START,null,1);
-		Node n1 = new Node(entrance+7,OperationAndDirection.RIGHT_7,start,2);
-		Node n2 = new Node(entrance/2,OperationAndDirection.RIGHT_2,start,2);
+		Node start = new Node(entrance,OperationAndDirection.START,null);
+		Node n1 = new Node(entrance+7,OperationAndDirection.ADD7_RIGHT,start);
+		Node n2 = new Node(entrance/2,OperationAndDirection.DIV2_RIGHT,start);
 		addOrNot(start);
 		addOrNot(n1);
-		//addOrNot(n2);
+		addOrNot(n2);
 		
 		// BFS
-		while(!q.isEmpty()){
-			Node n = q.poll();
+		while(!src.isEmpty()){
+			Node n = src.poll();
 			int p = n.value;
-			int l = n.level;
-			if (n.value == exit && n.od == OperationAndDirection.RIGHT_5 ){
+			if (n.value == exit && n.od == OperationAndDirection.SUB5_RIGHT){
 				Stack<OperationAndDirection> operations = new Stack<OperationAndDirection>();
 				while(n.parent!=null){
 					operations.push(n.od);
@@ -114,51 +115,52 @@ public class From2011To2012_SimpleBFS {
 
 				while(!operations.empty()) {
 					OperationAndDirection op = operations.pop();
-					if(op == OperationAndDirection.LEFT_7 || op == OperationAndDirection.RIGHT_7){
+					if(op == OperationAndDirection.ADD7_LEFT || op == OperationAndDirection.ADD7_RIGHT){
 						System.out.print(" +7");
-					}else if(op == OperationAndDirection.LEFT_5 || op == OperationAndDirection.RIGHT_5){
+					}else if(op == OperationAndDirection.SUB5_LEFT || op == OperationAndDirection.SUB5_RIGHT){
 						System.out.print(" -5");
-					}else if(op == OperationAndDirection.LEFT_3 || op == OperationAndDirection.RIGHT_3){
+					}else if(op == OperationAndDirection.MUL3_LEFT || op == OperationAndDirection.MUL3_RIGHT){
 						System.out.print(" *3");
-					}else if(op == OperationAndDirection.LEFT_2 || op == OperationAndDirection.RIGHT_2){
+					}else if(op == OperationAndDirection.DIV2_LEFT || op == OperationAndDirection.DIV2_RIGHT){
 						System.out.print(" /2");
 					}
 				}
 				System.out.println(" = " + exit);
+				System.out.println(visitedNodes + " nodes were visited.");
 				return;
 			}
 			switch (n.od) {
-			case RIGHT_5:
-				addOrNot(new Node(p*3,OperationAndDirection.LEFT_3,n,l+1));
+			case SUB5_RIGHT:
+				addOrNot(new Node(p*3,OperationAndDirection.MUL3_LEFT,n));
 				break;
-			case  LEFT_5:
-				addOrNot(new Node(p+7,OperationAndDirection.LEFT_7,n,l+1));
-				addOrNot(new Node(p/2,OperationAndDirection.LEFT_2,n,l+1));
-				addOrNot(new Node(p*3,OperationAndDirection.RIGHT_3,n,l+1));
+			case SUB5_LEFT:
+				addOrNot(new Node(p+7,OperationAndDirection.ADD7_LEFT,n));
+				addOrNot(new Node(p/2,OperationAndDirection.DIV2_LEFT,n));
+				addOrNot(new Node(p*3,OperationAndDirection.MUL3_RIGHT,n));
 				break;
-			case RIGHT_7:
-				addOrNot(new Node(p-5,OperationAndDirection.RIGHT_5,n,l+1));
-				addOrNot(new Node(p/2,OperationAndDirection.LEFT_2,n,l+1));
-				addOrNot(new Node(p*3,OperationAndDirection.RIGHT_3,n,l+1));
+			case ADD7_RIGHT:
+				addOrNot(new Node(p-5,OperationAndDirection.SUB5_RIGHT,n));
+				addOrNot(new Node(p/2,OperationAndDirection.DIV2_LEFT,n));
+				addOrNot(new Node(p*3,OperationAndDirection.MUL3_RIGHT,n));
 				break;
-			case LEFT_7:
-				addOrNot(new Node(p/2,OperationAndDirection.RIGHT_2,n,l+1));
+			case ADD7_LEFT:
+				addOrNot(new Node(p/2,OperationAndDirection.DIV2_RIGHT,n));
 				break;
-			case RIGHT_3:
-				addOrNot( new Node(p-5,OperationAndDirection.LEFT_5,n,l+1));
+			case MUL3_RIGHT:
+				addOrNot( new Node(p-5,OperationAndDirection.SUB5_LEFT,n));
 				break;
-			case LEFT_3:
-				addOrNot(new Node(p+7,OperationAndDirection.LEFT_7,n,l+1));
-				addOrNot(new Node(p-5,OperationAndDirection.RIGHT_5,n,l+1));
-				addOrNot(new Node(p/2,OperationAndDirection.LEFT_2,n,l+1));
+			case MUL3_LEFT:
+				addOrNot(new Node(p+7,OperationAndDirection.ADD7_LEFT,n));
+				addOrNot(new Node(p-5,OperationAndDirection.SUB5_RIGHT,n));
+				addOrNot(new Node(p/2,OperationAndDirection.DIV2_LEFT,n));
 				break;
-			case RIGHT_2:
-				addOrNot(new Node(p+7,OperationAndDirection.LEFT_7,n,l+1));
-				addOrNot(new Node(p-5,OperationAndDirection.RIGHT_5,n,l+1));
-				addOrNot(new Node(p*3,OperationAndDirection.RIGHT_3,n,l+1));
+			case DIV2_RIGHT:
+				addOrNot(new Node(p+7,OperationAndDirection.ADD7_LEFT,n));
+				addOrNot(new Node(p-5,OperationAndDirection.SUB5_RIGHT,n));
+				addOrNot(new Node(p*3,OperationAndDirection.MUL3_RIGHT,n));
 				break;
-			case LEFT_2:
-				addOrNot(new Node(p+7,OperationAndDirection.RIGHT_7,n,l+1));
+			case DIV2_LEFT:
+				addOrNot(new Node(p+7,OperationAndDirection.ADD7_RIGHT,n));
 				break;
 			default:
 				break;
