@@ -23,7 +23,7 @@ import java.util.Stack;
  *        exit the maze with a result of 2012. 
  *        You may pass through an operation several times, but not twice in a row.
  *  
- *  Problem source: http://www2.stetson.edu/~efriedma/holiday/2011/index.html
+ *  Problem source: http://www2.stetson.edu/~efriedma/puzzle/holiday/2011/index.html
  *  Problem was discovered in : http://weibo.com/1915548291/z4eTPtAnv
  *  Problem first introduced in Chinese was in : http://www.matrix67.com/blog/archives/4790
  * 
