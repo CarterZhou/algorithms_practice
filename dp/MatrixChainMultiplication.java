@@ -7,13 +7,13 @@ public class MatrixChainMultiplication {
 	public static int counter = 0;
 	
 	// Print out the optimal parenthesization of matrices
-	public static void printSolution(int[][] solutions,int i,int j){
+	public static void printSolution(int[][] sol,int i,int j){
 		if(i==j){
 			System.out.print("A"+i);
 		}else{
 			System.out.print("(");
-			printSolution(solutions, i, solutions[i][j]);
-			printSolution(solutions, solutions[i][j]+1, j);
+			printSolution(sol, i, sol[i][j]);
+			printSolution(sol, sol[i][j]+1, j);
 			System.out.print(")");
 		}
 	}
@@ -73,25 +73,8 @@ public class MatrixChainMultiplication {
 	
 	public static void main(String[] args) {
 		int[] p1 = new int[]{30,35,15,5,10,20,25};
-//		int[] p2 = new int[]{5,10,3,12,5,50,6};
 		int[][] solutions1 = new int[p1.length][p1.length];
 		int[][] m1 = new int[p1.length][p1.length];
-//		int[][] solutions2 = new int[p2.length][p2.length];
-//		int[][] m2 = new int[p2.length][p2.length];
-//		dp_bottomUp_MatrixChainOrder(p2, m2,solutions2);
-		//printSolution(solutions2, 1, p2.length-1);
-		/**
-		 * Test matrixChainMultiply()
-		 */
-		/*Matrix[] matrices = new Matrix[p2.length];
-		
-		Matrix mx0 = new Matrix(0, 0);
-		Matrix mx1 = new Matrix(5, 10);
-		Matrix mx2 = new Matrix(10, 3);
-		Matrix mx3 = new Matrix(3, 12);
-		Matrix mx4 = new Matrix(12, 5);
-		Matrix mx5 = new Matrix(5, 50);
-		Matrix mx6 = new Matrix(50, 6);*/
 		
 		Matrix[] matrices = new Matrix[p1.length];
 		
@@ -120,12 +103,11 @@ public class MatrixChainMultiplication {
 				}
 			}
 		}
-		
-//		dp_bottomUp_MatrixChainOrder(p2, m2,solutions2);
+
 		dp_bottomUp_MatrixChainOrder(p1, m1,solutions1);
 		
 		// Do the matrix chain multiplication, with optimal solutions table being provided.
-//		Matrix result = matrixChainMultiply(matrices, solutions2, 1, p2.length-1);
+
 		Matrix result = null;
 		try {
 			result = matrixChainMultiply(matrices, solutions1, 1, p1.length-1);
@@ -151,62 +133,7 @@ public class MatrixChainMultiplication {
 		// when a chain of matrices was multiplied.
 		System.out.println("Multiplication was done " + counter +" times, recorded by a counter");
 		
-		// Print out the matrices 
-		/*for(int s=0;s<matrices.length;s++){
-			for(int i=0;i<matrices[s].rows;i++){
-				String d = ",";
-				for(int j=0;j<matrices[s].columns;j++){
-					if(j == matrices[s].columns-1)
-						d = "";
-					System.out.print(matrices[s].mtrx[i][j]+d);
-				}
-				System.out.println();
-			}
-			System.out.println();
-		}*/
 		
-		
-		/**
-		 * Test multiply(Matrix m1,Matrix m2)
-		 * 
-		 */
-		
-		/*Matrix mxone = new Matrix(2, 3);
-		mxone.mtrx[0][0] = 1;
-		mxone.mtrx[0][1] = 0;
-		mxone.mtrx[0][2] = 2;
-		mxone.mtrx[1][0] = -1;
-		mxone.mtrx[1][1] = 3;
-		mxone.mtrx[1][2] = 1;
-		
-		Matrix mxtwo = new Matrix(3, 2);
-		//Matrix mxtwo = new Matrix(4, 2);
-		mxtwo.mtrx[0][0] = 3;
-		mxtwo.mtrx[0][1] = 1;
-		mxtwo.mtrx[1][0] = 2;
-		mxtwo.mtrx[1][1] = 1;
-		mxtwo.mtrx[2][0] = 1;
-		mxtwo.mtrx[2][1] = 0;
-//		mxtwo.mtrx[3][0] = 1;
-//		mxtwo.mtrx[3][1] = 0;
-		
-		Matrix mxthree = null;
-		try {
-			mxthree = multiply(mxone, mxtwo);
-		} catch (MatrixOperationException e) {
-			e.printStackTrace();
-		}
-		
-		for(int i=0;i<mxthree.rows;i++){
-			String d = ",";
-			for(int j=0;j<mxthree.columns;j++){
-				if(j == mxthree.columns-1)
-					d = "";
-				System.out.print(mxthree.mtrx[i][j]+d);
-			}
-			System.out.println();
-		}
-		*/
 	}
 
 

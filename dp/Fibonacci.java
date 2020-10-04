@@ -47,23 +47,13 @@ public class Fibonacci {
 	}
 	
  	public static void main(String[] args) {
- 		int nth = 10;
- 		long[] values = new long[nth+1];
+ 		int n = 10;
+ 		long[] values = new long[n+1];
+ 
+ 		System.out.println(dp_bottomUp_Fibonacci1(n, values));
  		
- 		//long begin1 = System.currentTimeMillis();
- 		System.out.println(dp_bottomUp_Fibonacci1(nth, values));
- 		//long end1 = System.currentTimeMillis();
- 		//System.out.println("Time elapsed..." + (end1-begin1)/1000 + " seconds");
+ 		System.out.println(dp_bottomUp_Fibonacci2(n));
  		
- 		System.out.println(dp_bottomUp_Fibonacci2(nth));
- 		
- 		/*long begin = System.currentTimeMillis();
- 		System.out.println(recursiveFibonacci(nth));
- 		long end = System.currentTimeMillis();
- 		System.out.println("Time elapsed..." + (end-begin)/1000 + " seconds");*/
- 		
- 		
- 		//System.out.println(Long.MAX_VALUE);
 	}
 
 }
